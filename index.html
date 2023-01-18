@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ixo Testnet Faucet</title>
+    <link rel="icon" href="https://p2psend.jambo.earth/favicon.ico" />
+    <meta name=”robots” content="index, follow">
+    <meta name="description" content="Ixo Testnet Faucet">
+    <meta></head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="prefetch" as="image" href="https://p2psend.jambo.earth/_next/image?url=%2Fimages%2Flogo.png&w=3840&q=75" />
+  </head>
+
+  <body style="background:#042233; min-height: 100vh;">
+    <div id="app">
+
+      <main class="container-md">
+        <div class="py-5 text-center">
+          <div style="min-height: 150px" class="mx-auto">
+            <img id="logo" class="d-block mx-auto" :src="logo" alt="logo" pre>
+          </div>
+          <h1 class="text-light my-4"><span id="testnet">{{ testnet }}</span> Faucet</h1>
+          <p class="lead text-light">Dear Ixo peeps! <br>
+              Welcome to our testnet! Are you looking for some tokens to start? 
+          </p>
+        </div>
+
+        <div class="row g-5">
+          <div class="input-group">
+              <input id="address" class="form-control" :placeholder="placeholder" v-model="address" name="address">
+              <button type="button" class="btn btn-secondary d-flex flex-row " @click="requestToken(this)">
+                <span>
+                  <span id="button-loading" class="spinner-border spinner-border-sm mt-1 mr-1" style="display:none" role="status" aria-hidden="true"></span>
+                </span>
+               <span class="sr-only">Request Tokens</span>
+              </button>
+          </div>
+        </div>
+  
+        <div id="message" v-html="message"></div>
+      </main>
+    
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2023 Ixo</p>
+      </footer>
+    </div>
+
+    <script type="module">
+      import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+
+      createApp({
+        data() {
+          return {
+            message: '',
+            testnet: 'Ixo',
+            logo: 'https://p2psend.jambo.earth/_next/image?url=%2Fimages%2Flogo.png&w=3840&q=75',
+            placeholder: 'Input an address to request token',
+            address: ''
+          }
+        },
+        created() {
+          console.log(this)
+          fetch("/config.json").then(response => response.json()).then(data => {
+            this.testnet = data.name
+            this.logo = data.logo
+            this.placeholder = `Input an address (e.g.: ${data.sample}) to received tokens`
+          });
+        },
+        methods: {
+          requestToken(obj) {
+            if (this.address) {
+              obj.disabled = true
+              document.getElementById("button-loading").style.display = 'block';
+              
+              fetch(`/send/${this.address}`).then(response => response.json()).then(data => {
+                  obj.disabled = false
+                  document.getElementById("button-loading").style.display = 'none';
+                  this.message = `
+                  <div class="alert alert-${data.result.code ===0? 'success': 'danger'} alert-dismissible show fade mt-2" role="alert">
+                      <li>${data.result.code ===0? 'Token sent': 'Request failed'}</li>
+                      <textarea class="form-control mt-1" rows="5" style="background-color:transparent">${JSON.stringify(data, null, 2)}</textarea>
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                  `
+              });
+            } else {
+                this.message = '<span class="text-danger">Address is required</span>'
+            }
+          }
+        }
+      }).mount('#app')
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  </body>
+</html>
