@@ -1,0 +1,13 @@
+version: '3.7'
+services:
+  faucet:
+    image: faucet:latest
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    #pull_policy: always
+    restart: always
+    environment:
+      - FAUCET_MNEMONIC="favorite sustain sad hood slogan shine veteran beach pulse upper youth peanut"
+    ports:
+      - 5000:80
