@@ -33,8 +33,9 @@ app.get('/send/:address', async (req, res) => {
 	if (address) {
 		try {
 			if (address.startsWith(conf.sender.option.prefix)) {
-				if ((await checker.checkAddress(address)) && (await checker.checkIp(req.ip))) {
-					checker.update(req.ip); // get ::1 on localhost
+				// if ((await checker.checkAddress(address)) && (await checker.checkIp(req.ip))) {
+				if (await checker.checkAddress(address)) {
+					// checker.update(req.ip); // get ::1 on localhost
 					sendTx(address).then(ret => {
 						console.log('sent tokens to ', address);
 						checker.update(address);
