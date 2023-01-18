@@ -6,11 +6,11 @@ export default {
 		path: './db/faucet.db',
 	},
 	project: {
-		name: 'Ixo Testnet',
+		name: 'Ixo Devnet',
 		logo: 'https://p2psend.jambo.earth/_next/image?url=%2Fimages%2Flogo.png&w=3840&q=75',
 	},
 	blockchain: {
-		rpc_endpoint: 'https://testnet.ixo.earth/rpc/',
+		rpc_endpoint: 'https://devnet.ixo.earth/rpc/',
 	},
 	sender: {
 		option: {
