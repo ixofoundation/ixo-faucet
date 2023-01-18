@@ -72,4 +72,4 @@ node --es-module-specifier-resolution=node faucet.js
 
 visit http://localhost:80
 
-80 is default, you can edit it in the config.json
+80 is default, you can edit it in the config.json.
