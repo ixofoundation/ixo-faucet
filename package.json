@@ -32,7 +32,8 @@
 		"dotenv": "^16.0.3",
 		"express": "4.18.2",
 		"level": "8.0.0",
-		"nodemodule": "0.3.0"
+		"nodemodule": "0.3.0",
+		"store": "^2.0.12"
 	},
 	"devDependencies": {
 		"nodemon": "2.0.20"

@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ixo Testnet Faucet</title>
+    <title>Ixo Faucet</title>
     <link rel="icon" href="https://p2psend.jambo.earth/favicon.ico" />
     <meta name=”robots” content="index, follow">
-    <meta name="description" content="Ixo Testnet Faucet">
+    <meta name="description" content="Ixo Faucet">
     <meta></head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="prefetch" as="image" href="https://p2psend.jambo.earth/_next/image?url=%2Fimages%2Flogo.png&w=3840&q=75" />
@@ -22,7 +22,7 @@
           </div>
           <h1 class="text-light my-4"><span id="testnet">{{ testnet }}</span> Faucet</h1>
           <p class="lead text-light">Dear Ixo peeps! <br>
-              Welcome to our testnet! Are you looking for some tokens to start? 
+              Welcome to our faucet! Are you looking for some tokens to start? 
           </p>
         </div>
 
@@ -60,7 +60,6 @@
           }
         },
         created() {
-          console.log(this)
           fetch("/config.json").then(response => response.json()).then(data => {
             this.testnet = data.name
             this.logo = data.logo

@@ -6,11 +6,7 @@ export default {
 		path: './db/faucet.db',
 	},
 	project: {
-		name: 'Ixo Testnet',
 		logo: 'https://p2psend.jambo.earth/_next/image?url=%2Fimages%2Flogo.png&w=3840&q=75',
-	},
-	blockchain: {
-		rpc_endpoint: 'https://testnet.ixo.earth/rpc/',
 	},
 	sender: {
 		option: {
@@ -33,6 +29,7 @@ export default {
 			gas: '200000',
 		},
 	},
+	memo: 'Faucet transfer from Ixo',
 	limit: {
 		// how many times each wallet address is allowed in a window(24h)
 		address: 1,
