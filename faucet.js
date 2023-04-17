@@ -3,7 +3,7 @@ import cors from 'cors';
 import * as path from 'path';
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 import { SigningStargateClient } from '@cosmjs/stargate';
-import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
+import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx.js';
 import { FrequencyChecker } from './checker';
 import dotenv from 'dotenv';
 import { getSignerData } from './store';
