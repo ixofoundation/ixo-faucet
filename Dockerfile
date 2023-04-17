@@ -1,11 +1,13 @@
-FROM node:16.15.0-alpine3.15
+FROM --platform=linux/amd64 node:latest
 
 WORKDIR /app
 
-COPY . .
+COPY package.json yarn.lock ./
 
-RUN yarn
+RUN yarn --pure-lockfile
+
+COPY . .
 
 EXPOSE 80
 
-CMD [ "yarn","start" ]
+CMD ["yarn","start"]

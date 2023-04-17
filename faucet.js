@@ -3,8 +3,10 @@ import cors from 'cors';
 import * as path from 'path';
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 import { SigningStargateClient } from '@cosmjs/stargate';
+import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { FrequencyChecker } from './checker';
 import dotenv from 'dotenv';
+import { getSignerData } from './store';
 
 dotenv.config();
 import conf from './config';
@@ -24,6 +26,7 @@ app.get('/config.json', async (req, res) => {
 	const [firstAccount] = await wallet.getAccounts();
 	const project = conf.project;
 	project.sample = firstAccount.address;
+	project.name = process.env.PROJECT_NAME;
 	res.send(project);
 });
 
@@ -66,10 +69,24 @@ async function sendTx(recipient) {
 	const [firstAccount] = await wallet.getAccounts();
 	// console.log("sender", firstAccount);
 
-	const rpcEndpoint = conf.blockchain.rpc_endpoint;
-	const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, wallet);
+	const client = await SigningStargateClient.connectWithSigner(process.env.RPC_ENDPOINT, wallet);
 
 	const amount = conf.tx.amount;
 	const fee = conf.tx.fee;
-	return client.sendTokens(firstAccount.address, recipient, [amount], fee);
+
+	const sendMsg = {
+		typeUrl: '/cosmos.bank.v1beta1.MsgSend',
+		value: {
+			fromAddress: firstAccount.address,
+			toAddress: recipient,
+			amount: [amount],
+		},
+	};
+
+	const signerData = await getSignerData(client, wallet);
+
+	const txRaw = await client.sign(firstAccount.address, [sendMsg], fee, conf.memo, signerData);
+	const txBytes = TxRaw.encode(txRaw).finish();
+
+	return client.broadcastTx(txBytes, client.broadcastTimeoutMs, client.broadcastPollIntervalMs);
 }
