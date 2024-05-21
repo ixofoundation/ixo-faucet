@@ -36,6 +36,9 @@
 		"store": "^2.0.12"
 	},
 	"devDependencies": {
-		"nodemon": "2.0.20"
+		"@semantic-release/git": "^10.0.1",
+		"conventional-changelog-conventionalcommits": "^8.0.0",
+		"nodemon": "2.0.20",
+		"semantic-release": "22"
 	}
 }
