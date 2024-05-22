@@ -1,44 +1,45 @@
 {
-	"name": "ixo-faucet",
-	"type": "module",
-	"version": "1.0.0",
-	"description": "Faucet for Ixo Testnet",
-	"main": "faucet.js",
-	"scripts": {
-		"dev": "nodemon --experimental-modules --es-module-specifier-resolution=node faucet.js",
-		"start": "node --experimental-modules --es-module-specifier-resolution=node faucet.js"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/ixofoundation/ixo-faucet.git"
-	},
-	"keywords": [
-		"Faucet",
-		"Cosmos",
-		"SDK",
-		"blockchain"
-	],
-	"author": "Ixo",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/ixo-faucet/ixo-faucet/issues"
-	},
-	"homepage": "https://github.com/ixo-faucet/ixo-faucet#readme",
-	"dependencies": {
-		"@cosmjs/crypto": "0.29.4",
-		"@cosmjs/proto-signing": "0.29.4",
-		"@cosmjs/stargate": "0.29.4",
-		"cors": "^2.8.5",
-		"dotenv": "^16.0.3",
-		"express": "4.18.2",
-		"level": "8.0.0",
-		"nodemodule": "0.3.0",
-		"store": "^2.0.12"
-	},
-	"devDependencies": {
-		"@semantic-release/git": "^10.0.1",
-		"conventional-changelog-conventionalcommits": "^8.0.0",
-		"nodemon": "2.0.20",
-		"semantic-release": "22"
-	}
+  "name": "ixo-faucet",
+  "type": "module",
+  "version": "0.0.2",
+  "description": "Faucet for Ixo Testnet",
+  "main": "faucet.js",
+  "scripts": {
+    "dev": "nodemon --experimental-modules --es-module-specifier-resolution=node faucet.js",
+    "start": "node --experimental-modules --es-module-specifier-resolution=node faucet.js",
+    "build": "echo \"Build succeeded.\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ixofoundation/ixo-faucet.git"
+  },
+  "keywords": [
+    "Faucet",
+    "Cosmos",
+    "SDK",
+    "blockchain"
+  ],
+  "author": "Ixo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ixo-faucet/ixo-faucet/issues"
+  },
+  "homepage": "https://github.com/ixo-faucet/ixo-faucet#readme",
+  "dependencies": {
+    "@cosmjs/crypto": "0.29.4",
+    "@cosmjs/proto-signing": "0.29.4",
+    "@cosmjs/stargate": "0.29.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "4.18.2",
+    "level": "8.0.0",
+    "nodemodule": "0.3.0",
+    "store": "^2.0.12"
+  },
+  "devDependencies": {
+    "@semantic-release/git": "^10.0.1",
+    "conventional-changelog-conventionalcommits": "^7.0.2",
+    "nodemon": "2.0.20",
+    "semantic-release": "22"
+  }
 }
