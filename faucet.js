@@ -4,12 +4,12 @@ import * as path from 'path';
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 import { SigningStargateClient } from '@cosmjs/stargate';
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx.js';
-import { FrequencyChecker } from './checker';
+import { FrequencyChecker } from './checker.js';
 import dotenv from 'dotenv';
-import { getSignerData } from './store';
+import { getSignerData } from './store.js';
 
 dotenv.config();
-import conf from './config';
+import conf from './config.js';
 // console.log('loaded config: ', conf);
 
 const app = express();
