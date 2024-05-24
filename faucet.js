@@ -21,6 +21,10 @@ app.get('/', (req, res) => {
 	res.sendFile(path.resolve('./index.html'));
 });
 
+app.get('/ping', (req, res) => {
+	res.send('pong');
+});
+
 app.get('/config.json', async (req, res) => {
 	const wallet = await DirectSecp256k1HdWallet.fromMnemonic(process.env.FAUCET_MNEMONIC, conf.sender.option);
 	const [firstAccount] = await wallet.getAccounts();
