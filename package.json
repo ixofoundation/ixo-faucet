@@ -26,9 +26,7 @@
   },
   "homepage": "https://github.com/ixo-faucet/ixo-faucet#readme",
   "dependencies": {
-    "@cosmjs/crypto": "0.29.4",
-    "@cosmjs/proto-signing": "0.29.4",
-    "@cosmjs/stargate": "0.29.4",
+    "@ixo/impactxclient-sdk": "1.2.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "4.18.2",

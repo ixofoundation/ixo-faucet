@@ -2,15 +2,13 @@ import express from 'express';
 import cors from 'cors';
 import * as path from 'path';
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
-import { SigningStargateClient } from '@cosmjs/stargate';
-import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx.js';
+import { createSigningClient } from '@ixo/impactxclient-sdk';
 import { FrequencyChecker } from './checker.js';
 import dotenv from 'dotenv';
-import { getSignerData } from './store.js';
+import conf from './config.js';
+import store from 'store';
 
 dotenv.config();
-import conf from './config.js';
-// console.log('loaded config: ', conf);
 
 const app = express();
 app.use(cors());
@@ -71,9 +69,12 @@ app.listen(conf.port, () => {
 async function sendTx(recipient) {
 	const wallet = await DirectSecp256k1HdWallet.fromMnemonic(process.env.FAUCET_MNEMONIC, conf.sender.option);
 	const [firstAccount] = await wallet.getAccounts();
-	// console.log("sender", firstAccount);
 
-	const client = await SigningStargateClient.connectWithSigner(process.env.RPC_ENDPOINT, wallet);
+	const client = await createSigningClient(process.env.RPC_ENDPOINT, wallet, false, null, {
+		getLocalData: k => store.get(k),
+		setLocalData: (k, d) => store.set(k, d),
+	});
+	// const client = await SigningStargateClient.connectWithSigner(process.env.RPC_ENDPOINT, wallet);
 
 	const amount = conf.tx.amount;
 	const fee = conf.tx.fee;
@@ -87,10 +88,6 @@ async function sendTx(recipient) {
 		},
 	};
 
-	const signerData = await getSignerData(client, wallet);
-
-	const txRaw = await client.sign(firstAccount.address, [sendMsg], fee, conf.memo, signerData);
-	const txBytes = TxRaw.encode(txRaw).finish();
-
-	return client.broadcastTx(txBytes, client.broadcastTimeoutMs, client.broadcastPollIntervalMs);
+	const txResponse = await client.signAndBroadcast(firstAccount.address, [sendMsg], fee, conf.memo);
+	return txResponse;
 }
