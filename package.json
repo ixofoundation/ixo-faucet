@@ -27,12 +27,12 @@
   "homepage": "https://github.com/ixo-faucet/ixo-faucet#readme",
   "dependencies": {
     "@ixo/impactxclient-sdk": "2.2.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
+    "cors": "2.8.5",
+    "dotenv": "16.0.3",
     "express": "4.18.2",
     "level": "8.0.0",
     "nodemodule": "0.3.0",
-    "store": "^2.0.12"
+    "store": "2.0.12"
   },
   "devDependencies": {
     "@semantic-release/git": "^10.0.1",
