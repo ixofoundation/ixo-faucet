@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/ixo-faucet/ixo-faucet#readme",
   "dependencies": {
-    "@ixo/impactxclient-sdk": "1.2.0",
+    "@ixo/impactxclient-sdk": "2.2.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "4.18.2",
