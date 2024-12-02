@@ -49,11 +49,6 @@
     <script type="module">
       import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
 
-      // patch for bigint to json
-      BigInt.prototype.toJSON = function () {
-        return this.toString();
-      };
-
       createApp({
         data() {
           return {

@@ -91,3 +91,8 @@ async function sendTx(recipient) {
 	const txResponse = await client.signAndBroadcast(firstAccount.address, [sendMsg], fee, conf.memo);
 	return txResponse;
 }
+
+// patch for bigint to json
+BigInt.prototype.toJSON = function () {
+	return this.toString();
+};
