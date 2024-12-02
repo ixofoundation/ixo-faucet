@@ -1,7 +1,7 @@
 {
   "name": "ixo-faucet",
   "type": "module",
-  "version": "1.0.0-develop.5",
+  "version": "1.0.0-develop.6",
   "description": "Faucet for Ixo Testnet",
   "main": "faucet.js",
   "scripts": {
